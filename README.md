@@ -1,10 +1,10 @@
-# Provides helpful utilities for dealing with tracking numbers
+# Package Tracking Utilities
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/rpungello/package-tracking.svg?style=flat-square)](https://packagist.org/packages/rpungello/package-tracking)
 [![Tests](https://github.com/rpungello/package-tracking/actions/workflows/run-tests.yml/badge.svg?branch=main)](https://github.com/rpungello/package-tracking/actions/workflows/run-tests.yml)
 [![Total Downloads](https://img.shields.io/packagist/dt/rpungello/package-tracking.svg?style=flat-square)](https://packagist.org/packages/rpungello/package-tracking)
 
-This is where your description should go. Try and limit it to a paragraph or two. Consider adding a small example.
+Provides helpful utilities for dealing with tracking numbers
 
 ## Installation
 
