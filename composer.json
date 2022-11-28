@@ -1,16 +1,16 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "rpungello/package-tracking",
+    "description": "Provides helpful utilities for dealing with tracking numbers",
     "keywords": [
-        ":vendor_name",
-        ":package_slug"
+        "rpungello",
+        "package-tracking"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/rpungello/package-tracking",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Rob Pungello",
+            "email": "rob.pungello@gmail.com",
             "role": "Developer"
         }
     ],
@@ -24,12 +24,12 @@
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src"
+            "Rpungello\\PackageTracking\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Rpungello\\PackageTracking\\Tests\\": "tests"
         }
     },
     "scripts": {
