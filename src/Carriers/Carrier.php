@@ -24,7 +24,7 @@ abstract class Carrier
         $trackingNumbers = [];
 
         foreach ($this->getTrackingNumberPatterns() as $pattern) {
-            if (preg_match_all('/'.$pattern.'/', $text, $matches)) {
+            if (preg_match_all('/\b'.$pattern.'\b/', $text, $matches)) {
                 $trackingNumbers = array_merge($trackingNumbers, $matches[0]);
             }
         }
