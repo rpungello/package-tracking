@@ -13,7 +13,7 @@ class UPS extends Carrier
 
     public function getTrackingUrl(string $trackingNumber): string
     {
-        // TODO: Implement getTrackingUrl() method.
+        return 'https://wwwapps.ups.com/tracking/tracking.cgi?tracknum='.$trackingNumber;
     }
 
     public function getName(): string

@@ -42,3 +42,8 @@ it('can extract ups tracking numbers', function () {
         expect($results[$i]->trackingNumber)->toBe($expected[$i]->trackingNumber);
     }
 });
+
+it('can generate tracking URLs', function () {
+    $package = new Package(new UPS(), '1Z12345E0305271640');
+    expect($package->getTrackingUrl())->toBe('https://wwwapps.ups.com/tracking/tracking.cgi?tracknum=1Z12345E0305271640');
+});
