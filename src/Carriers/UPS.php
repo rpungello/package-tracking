@@ -4,7 +4,6 @@ namespace Rpungello\PackageTracking\Carriers;
 
 class UPS extends Carrier
 {
-
     public function getTrackingNumberPatterns(): array
     {
         return [

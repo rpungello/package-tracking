@@ -2,8 +2,6 @@
 
 namespace Rpungello\PackageTracking\Carriers;
 
-use Rpungello\PackageTracking\Package;
-
 abstract class Carrier
 {
     public function __construct()

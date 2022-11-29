@@ -24,7 +24,7 @@ it('can extract ups tracking numbers', function () {
     $ups = new UPS();
 
     $text = "First line has a tracking number 1Z12345E0305271640 and some other text\nSecond line has 1Z12345E0205271688";
-    $expected = new Collection(Package::class, [new Package($ups, '1Z12345E0305271640',), new Package($ups, '1Z12345E0205271688')]);
+    $expected = new Collection(Package::class, [new Package($ups, '1Z12345E0305271640'), new Package($ups, '1Z12345E0205271688')]);
 
     $results = $instance->parsePackages($text);
     expect($results)->toHaveCount($expected->count());
