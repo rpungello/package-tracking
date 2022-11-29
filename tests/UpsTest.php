@@ -19,6 +19,14 @@ it('can reject invalid ups tracking numbers', function () {
     expect($instance->trackingNumberMatches($trackingNumber))->toBeFalse();
 });
 
+it('can reject ups tracking numbers with padding', function () {
+    $instance = new UPS();
+
+    expect($instance->trackingNumberMatches('1Z12345E0305271640 '))->toBeFalse();
+    expect($instance->trackingNumberMatches(' 1Z12345E0305271640'))->toBeFalse();
+    expect($instance->trackingNumberMatches(' 1Z12345E0305271640 '))->toBeFalse();
+});
+
 it('can extract ups tracking numbers', function () {
     $instance = new PackageTracking();
     $ups = new UPS();

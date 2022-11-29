@@ -11,7 +11,7 @@ abstract class Carrier
     public function trackingNumberMatches(string $trackingNumber): bool
     {
         foreach ($this->getTrackingNumberPatterns() as $pattern) {
-            if (preg_match($pattern, $trackingNumber)) {
+            if (preg_match('/^' . $pattern . '$/', $trackingNumber)) {
                 return true;
             }
         }
@@ -24,7 +24,7 @@ abstract class Carrier
         $trackingNumbers = [];
 
         foreach ($this->getTrackingNumberPatterns() as $pattern) {
-            if (preg_match_all($pattern, $text, $matches)) {
+            if (preg_match_all('/' . $pattern . '/', $text, $matches)) {
                 $trackingNumbers = array_merge($trackingNumbers, $matches[0]);
             }
         }
