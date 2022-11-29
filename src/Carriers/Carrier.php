@@ -12,7 +12,7 @@ abstract class Carrier
 
     public function trackingNumberMatches(string $trackingNumber): bool
     {
-        foreach($this->getTrackingNumberPatterns() as $pattern) {
+        foreach ($this->getTrackingNumberPatterns() as $pattern) {
             if (preg_match($pattern, $trackingNumber)) {
                 return true;
             }
@@ -23,7 +23,15 @@ abstract class Carrier
 
     public function extractTrackingNumbers(string $text): array
     {
-        return [];
+        $trackingNumbers = [];
+
+        foreach ($this->getTrackingNumberPatterns() as $pattern) {
+            if (preg_match_all($pattern, $text, $matches)) {
+                $trackingNumbers = array_merge($trackingNumbers, $matches[0]);
+            }
+        }
+
+        return $trackingNumbers;
     }
 
     abstract public function getTrackingNumberPatterns(): array;

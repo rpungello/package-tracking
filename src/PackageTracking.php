@@ -4,6 +4,7 @@ namespace Rpungello\PackageTracking;
 
 use Ramsey\Collection\Collection;
 use Rpungello\PackageTracking\Carriers\Carrier;
+use Rpungello\PackageTracking\Carriers\UPS;
 use Rpungello\PackageTracking\Exceptions\InvalidTrackingNumberException;
 
 class PackageTracking
@@ -12,7 +13,9 @@ class PackageTracking
 
     public function __construct()
     {
-        $this->carriers = new Collection(Carrier::class);
+        $this->carriers = new Collection(Carrier::class, [
+            new UPS()
+        ]);
     }
 
     public function parseTrackingNumber(string $trackingNumber): Package
