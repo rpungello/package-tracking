@@ -17,8 +17,9 @@ composer require rpungello/package-tracking
 ## Usage
 
 ```php
-$skeleton = new Rpungello\PackageTracking();
-echo $skeleton->echoPhrase('Hello, Rpungello!');
+$instance = new \Rpungello\PackageTracking\PackageTracking();
+$package = $instance->parseTrackingNumber('1Z12345E0305271640');
+$packages = $instance->parsePackages("First line has a tracking number 1Z12345E0305271640 and some other text\nSecond line has 1Z12345E0205271688");
 ```
 
 ## Testing
