@@ -47,3 +47,13 @@ it('can generate tracking URLs', function () {
     $package = new Package(new UPS(), '1Z12345E0305271640');
     expect($package->getTrackingUrl())->toBe('https://wwwapps.ups.com/tracking/tracking.cgi?tracknum=1Z12345E0305271640');
 });
+
+it('can parse ups tracking numbers', function () {
+    $instance = new PackageTracking();
+    $trackingNumber = '1Z12345E0305271640';
+    $package = $instance->parseTrackingNumber($trackingNumber);
+
+    expect($package)->toBeInstanceOf(Package::class);
+    expect($package->carrier->getName())->toBe('UPS');
+    expect($package->trackingNumber)->toBe('1Z12345E0305271640');
+});
