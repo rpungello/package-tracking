@@ -23,6 +23,7 @@ class PackageTracking
     public function addCarrier(Carrier $carrier): self
     {
         $this->carriers->add($carrier);
+
         return $this;
     }
 
