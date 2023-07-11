@@ -7,7 +7,6 @@ class FedEx extends Carrier
     public function getTrackingNumberPatterns(): array
     {
         return [
-            '(96\d{20})',
             '\d{15}',
             '\d{12}',
             '((98\d\d\d\d\d?\d\d\d\d|98\d\d) ?\d\d\d\d ?\d\d\d\d( ?\d\d\d)?)',

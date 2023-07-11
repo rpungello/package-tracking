@@ -8,7 +8,6 @@ use Rpungello\PackageTracking\PackageTracking;
 it('can match fedex tracking numbers', function () {
     $instance = new FedEx();
     $trackingNumbers = [
-        '9600000000000000000000',
         '000000000000000',
         '000000000000',
         '9800000000000000000',
@@ -52,8 +51,8 @@ it('can extract fedex tracking numbers', function () {
     $instance = new PackageTracking();
     $fedex = new FedEx();
 
-    $text = "First line has a tracking number 9600000000000000000000 and some other text\nSecond line has 98000000000 0000 0000";
-    $expected = new Collection(Package::class, [new Package($fedex, '9600000000000000000000'), new Package($fedex, '98000000000 0000 0000')]);
+    $text = "First line has a tracking number 000000000000 and some other text\nSecond line has 98000000000 0000 0000";
+    $expected = new Collection(Package::class, [new Package($fedex, '000000000000'), new Package($fedex, '98000000000 0000 0000')]);
 
     $results = $instance->parsePackages($text);
     expect($results)->toHaveCount($expected->count());
@@ -65,16 +64,16 @@ it('can extract fedex tracking numbers', function () {
 });
 
 it('can generate tracking URLs', function () {
-    $package = new Package(new FedEx(), '9600000000000000000000');
-    expect($package->getTrackingUrl())->toBe('https://www.fedex.com/fedextrack/?trknbr=9600000000000000000000');
+    $package = new Package(new FedEx(), '000000000000');
+    expect($package->getTrackingUrl())->toBe('https://www.fedex.com/fedextrack/?trknbr=000000000000');
 });
 
 it('can parse fedex tracking numbers', function () {
     $instance = new PackageTracking();
-    $trackingNumber = '9600000000000000000000';
+    $trackingNumber = '000000000000';
     $package = $instance->parseTrackingNumber($trackingNumber);
 
     expect($package)->toBeInstanceOf(Package::class);
     expect($package->carrier->getName())->toBe('FedEx');
-    expect($package->trackingNumber)->toBe('9600000000000000000000');
+    expect($package->trackingNumber)->toBe('000000000000');
 });
