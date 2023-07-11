@@ -4,7 +4,6 @@ namespace Rpungello\PackageTracking\Carriers;
 
 class USPS extends Carrier
 {
-
     public function getTrackingNumberPatterns(): array
     {
         return [
@@ -14,7 +13,7 @@ class USPS extends Carrier
 
     public function getTrackingUrl(string $trackingNumber): string
     {
-        return 'https://tools.usps.com/go/TrackConfirmAction_input?strOrigTrackNum=' . str_replace(' ', '', $trackingNumber);
+        return 'https://tools.usps.com/go/TrackConfirmAction_input?strOrigTrackNum='.str_replace(' ', '', $trackingNumber);
     }
 
     public function getName(): string
