@@ -10,6 +10,11 @@ class Package
     {
     }
 
+    /**
+     * Gets the URL for tracking the current package on the carrier's website
+     *
+     * @return string
+     */
     public function getTrackingUrl(): string
     {
         return $this->carrier->getTrackingUrl($this->trackingNumber);

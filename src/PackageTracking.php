@@ -11,6 +11,11 @@ use Rpungello\PackageTracking\Exceptions\InvalidTrackingNumberException;
 
 class PackageTracking
 {
+    /**
+     * Carriers supported by this package tracking instance
+     *
+     * @var Collection<Carrier>
+     */
     private Collection $carriers;
 
     public function __construct()
@@ -22,6 +27,12 @@ class PackageTracking
         ]);
     }
 
+    /**
+     * Adds a new carrier to the list of carriers that are supported by this package tracking instance
+     *
+     * @param Carrier $carrier
+     * @return $this
+     */
     public function addCarrier(Carrier $carrier): self
     {
         $this->carriers->add($carrier);
@@ -29,9 +40,14 @@ class PackageTracking
         return $this;
     }
 
+    /**
+     * Parse a single tracking number and return a Package object if it matches any of the supported carriers.
+     *
+     * @param string $trackingNumber
+     * @return Package
+     */
     public function parseTrackingNumber(string $trackingNumber): Package
     {
-        /** @var Carrier $carrier */
         foreach ($this->carriers as $carrier) {
             if ($carrier->trackingNumberMatches($trackingNumber)) {
                 return new Package(
@@ -44,6 +60,12 @@ class PackageTracking
         throw new InvalidTrackingNumberException();
     }
 
+    /**
+     * Parse multiple packages from a block of text and return a collection of Package objects.
+     *
+     * @param string $text
+     * @return Collection
+     */
     public function parsePackages(string $text): Collection
     {
         $packages = new Collection(Package::class);
