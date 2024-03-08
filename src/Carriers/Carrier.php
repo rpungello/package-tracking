@@ -10,9 +10,6 @@ abstract class Carrier
 
     /**
      * Checks whether the supplied tracking number matches any of the predefined patterns for the current carrier
-     *
-     * @param string $trackingNumber
-     * @return bool
      */
     public function trackingNumberMatches(string $trackingNumber): bool
     {
@@ -31,7 +28,6 @@ abstract class Carrier
      * This additional check prevents situations where a very large string of numbers triggers a false match on a
      * numeric tracking number pattern (for example).
      *
-     * @param string $text
      * @return string[]
      */
     public function extractTrackingNumbers(string $text): array
@@ -56,16 +52,11 @@ abstract class Carrier
 
     /**
      * Convert a tracking number into a URL that links to the carrier's tracking page
-     *
-     * @param string $trackingNumber
-     * @return string
      */
     abstract public function getTrackingUrl(string $trackingNumber): string;
 
     /**
      * Get the name of the carrier (ex: UPS, FedEx, etc.)
-     *
-     * @return string
      */
     abstract public function getName(): string;
 }

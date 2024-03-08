@@ -30,7 +30,6 @@ class PackageTracking
     /**
      * Adds a new carrier to the list of carriers that are supported by this package tracking instance
      *
-     * @param Carrier $carrier
      * @return $this
      */
     public function addCarrier(Carrier $carrier): self
@@ -42,9 +41,6 @@ class PackageTracking
 
     /**
      * Parse a single tracking number and return a Package object if it matches any of the supported carriers.
-     *
-     * @param string $trackingNumber
-     * @return Package
      */
     public function parseTrackingNumber(string $trackingNumber): Package
     {
@@ -62,9 +58,6 @@ class PackageTracking
 
     /**
      * Parse multiple packages from a block of text and return a collection of Package objects.
-     *
-     * @param string $text
-     * @return Collection
      */
     public function parsePackages(string $text): Collection
     {
