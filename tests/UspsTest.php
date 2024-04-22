@@ -22,9 +22,9 @@ it('can reject invalid usps tracking numbers', function () {
 it('can reject usps tracking numbers with padding', function () {
     $instance = new USPS();
 
-    expect($instance->trackingNumberMatches('9400 1000 0000 0000 0000 00 '))->toBeFalse();
-    expect($instance->trackingNumberMatches(' 9400 1000 0000 0000 0000 00'))->toBeFalse();
-    expect($instance->trackingNumberMatches(' 9400 1000 0000 0000 0000 00 '))->toBeFalse();
+    expect($instance->trackingNumberMatches('9400 1000 0000 0000 0000 00 '))->toBeFalse()
+        ->and($instance->trackingNumberMatches(' 9400 1000 0000 0000 0000 00'))->toBeFalse()
+        ->and($instance->trackingNumberMatches(' 9400 1000 0000 0000 0000 00 '))->toBeFalse();
 });
 
 it('can extract usps tracking numbers', function () {
@@ -38,8 +38,24 @@ it('can extract usps tracking numbers', function () {
     expect($results)->toHaveCount($expected->count());
 
     for ($i = 0; $i < $expected->count(); $i++) {
-        expect($results[$i]->carrier->getName())->toBe('USPS');
-        expect($results[$i]->trackingNumber)->toBe($expected[$i]->trackingNumber);
+        expect($results[$i]->carrier->getName())->toBe('USPS')
+            ->and($results[$i]->trackingNumber)->toBe($expected[$i]->trackingNumber);
+    }
+});
+
+it('can extract usps tracking numbers without boundaries', function () {
+    $instance = new PackageTracking();
+    $usps = new USPS();
+
+    $text = "First line has a tracking number9400 1000 0000 0000 0000 00and some other text\nSecond line has 9205 5000 0000 0000 0000 00";
+    $expected = new Collection(Package::class, [new Package($usps, '9400 1000 0000 0000 0000 00'), new Package($usps, '9205 5000 0000 0000 0000 00')]);
+
+    $results = $instance->parsePackages($text, false);
+    expect($results)->toHaveCount($expected->count());
+
+    for ($i = 0; $i < $expected->count(); $i++) {
+        expect($results[$i]->carrier->getName())->toBe('USPS')
+            ->and($results[$i]->trackingNumber)->toBe($expected[$i]->trackingNumber);
     }
 });
 
@@ -53,7 +69,7 @@ it('can parse usps tracking numbers', function () {
     $trackingNumber = '9400 1000 0000 0000 0000 00';
     $package = $instance->parseTrackingNumber($trackingNumber);
 
-    expect($package)->toBeInstanceOf(Package::class);
-    expect($package->carrier->getName())->toBe('USPS');
-    expect($package->trackingNumber)->toBe('9400 1000 0000 0000 0000 00');
+    expect($package)->toBeInstanceOf(Package::class)
+        ->and($package->carrier->getName())->toBe('USPS')
+        ->and($package->trackingNumber)->toBe('9400 1000 0000 0000 0000 00');
 });

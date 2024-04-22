@@ -59,13 +59,13 @@ class PackageTracking
     /**
      * Parse multiple packages from a block of text and return a collection of Package objects.
      */
-    public function parsePackages(string $text): Collection
+    public function parsePackages(string $text, bool $requireBoundary = true): Collection
     {
         $packages = new Collection(Package::class);
 
         /** @var Carrier $carrier */
         foreach ($this->carriers as $carrier) {
-            foreach ($carrier->extractTrackingNumbers($text) as $trackingNumber) {
+            foreach ($carrier->extractTrackingNumbers($text, $requireBoundary) as $trackingNumber) {
                 $packages->add(
                     new Package(
                         $carrier,

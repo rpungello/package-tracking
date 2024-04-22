@@ -18,7 +18,7 @@ it('can extract ups and fedex tracking numbers', function () {
     expect($results)->toHaveCount($expected->count());
 
     for ($i = 0; $i < $expected->count(); $i++) {
-        expect($results[$i]->carrier->getName())->toBe($expected[$i]->carrier->getName());
-        expect($results[$i]->trackingNumber)->toBe($expected[$i]->trackingNumber);
+        expect($results[$i]->carrier->getName())->toBe($expected[$i]->carrier->getName())
+            ->and($results[$i]->trackingNumber)->toBe($expected[$i]->trackingNumber);
     }
 });

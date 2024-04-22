@@ -30,12 +30,12 @@ abstract class Carrier
      *
      * @return string[]
      */
-    public function extractTrackingNumbers(string $text): array
+    public function extractTrackingNumbers(string $text, bool $requireBoundary = true): array
     {
         $trackingNumbers = [];
 
         foreach ($this->getTrackingNumberPatterns() as $pattern) {
-            if (preg_match_all('/\b'.$pattern.'\b/', $text, $matches)) {
+            if (preg_match_all($this->convertPatternToRegularExpression($pattern, $requireBoundary), $text, $matches)) {
                 $trackingNumbers = array_merge($trackingNumbers, $matches[0]);
             }
         }
@@ -59,4 +59,18 @@ abstract class Carrier
      * Get the name of the carrier (ex: UPS, FedEx, etc.)
      */
     abstract public function getName(): string;
+
+    /**
+     * @param mixed $pattern
+     * @param bool $requireBoundary
+     * @return string
+     */
+    private function convertPatternToRegularExpression(string $pattern, bool $requireBoundary = true): string
+    {
+        if ($requireBoundary) {
+            return '/\b' . $pattern . '\b/';
+        } else {
+            return "/$pattern/";
+        }
+    }
 }

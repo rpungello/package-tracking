@@ -42,9 +42,9 @@ it('can reject invalid fedex tracking numbers', function () {
 it('can reject fedex tracking numbers with padding', function () {
     $instance = new FedEx();
 
-    expect($instance->trackingNumberMatches('9600000000000000000000 '))->toBeFalse();
-    expect($instance->trackingNumberMatches(' 98000000000 0000 0000'))->toBeFalse();
-    expect($instance->trackingNumberMatches(' 000000000000 '))->toBeFalse();
+    expect($instance->trackingNumberMatches('9600000000000000000000 '))->toBeFalse()
+        ->and($instance->trackingNumberMatches(' 98000000000 0000 0000'))->toBeFalse()
+        ->and($instance->trackingNumberMatches(' 000000000000 '))->toBeFalse();
 });
 
 it('can extract fedex tracking numbers', function () {
@@ -58,8 +58,24 @@ it('can extract fedex tracking numbers', function () {
     expect($results)->toHaveCount($expected->count());
 
     for ($i = 0; $i < $expected->count(); $i++) {
-        expect($results[$i]->carrier->getName())->toBe('FedEx');
-        expect($results[$i]->trackingNumber)->toBe($expected[$i]->trackingNumber);
+        expect($results[$i]->carrier->getName())->toBe('FedEx')
+            ->and($results[$i]->trackingNumber)->toBe($expected[$i]->trackingNumber);
+    }
+});
+
+it('can extract fedex tracking numbers with no boundaries', function () {
+    $instance = new PackageTracking();
+    $fedex = new FedEx();
+
+    $text = "First line has a tracking number000000000000and some other text\nSecond line has 98000000000 0000 0000";
+    $expected = new Collection(Package::class, [new Package($fedex, '000000000000'), new Package($fedex, '98000000000 0000 0000')]);
+
+    $results = $instance->parsePackages($text, false);
+    expect($results)->toHaveCount($expected->count());
+
+    for ($i = 0; $i < $expected->count(); $i++) {
+        expect($results[$i]->carrier->getName())->toBe('FedEx')
+            ->and($results[$i]->trackingNumber)->toBe($expected[$i]->trackingNumber);
     }
 });
 
@@ -73,7 +89,7 @@ it('can parse fedex tracking numbers', function () {
     $trackingNumber = '000000000000';
     $package = $instance->parseTrackingNumber($trackingNumber);
 
-    expect($package)->toBeInstanceOf(Package::class);
-    expect($package->carrier->getName())->toBe('FedEx');
-    expect($package->trackingNumber)->toBe('000000000000');
+    expect($package)->toBeInstanceOf(Package::class)
+        ->and($package->carrier->getName())->toBe('FedEx')
+        ->and($package->trackingNumber)->toBe('000000000000');
 });
