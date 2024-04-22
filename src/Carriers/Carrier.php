@@ -61,14 +61,12 @@ abstract class Carrier
     abstract public function getName(): string;
 
     /**
-     * @param mixed $pattern
-     * @param bool $requireBoundary
-     * @return string
+     * @param  mixed  $pattern
      */
     private function convertPatternToRegularExpression(string $pattern, bool $requireBoundary = true): string
     {
         if ($requireBoundary) {
-            return '/\b' . $pattern . '\b/';
+            return '/\b'.$pattern.'\b/';
         } else {
             return "/$pattern/";
         }
