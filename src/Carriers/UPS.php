@@ -7,7 +7,7 @@ class UPS extends Carrier
     public function getTrackingNumberPatterns(): array
     {
         return [
-            '1Z ?[0-9A-Z]{3} ?[0-9A-Z]{3} ?[0-9A-Z]{2} ?[0-9A-Z]{4} ?[0-9A-Z]{3} ?[0-9A-Z]',
+            '1[Zz] ?[0-9A-Za-z]{3} ?[0-9A-Za-z]{3} ?[0-9A-Za-z]{2} ?[0-9A-Za-z]{4} ?[0-9A-Za-z]{3} ?[0-9A-Za-z]',
         ];
     }
 
