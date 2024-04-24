@@ -51,8 +51,8 @@ it('can extract fedex tracking numbers', function () {
     $instance = new PackageTracking();
     $fedex = new FedEx();
 
-    $text = "First line has a tracking number 000000000000 and some other text\nSecond line has 98000000000 0000 0000";
-    $expected = new Collection(Package::class, [new Package($fedex, '000000000000'), new Package($fedex, '98000000000 0000 0000')]);
+    $text = "First line has a tracking number 100000000001 and some other text\nSecond line has 98000000000 0000 0000";
+    $expected = new Collection(Package::class, [new Package($fedex, '100000000001'), new Package($fedex, '98000000000 0000 0000')]);
 
     $results = $instance->parsePackages($text);
     expect($results)->toHaveCount($expected->count());
@@ -67,8 +67,8 @@ it('can extract fedex tracking numbers with no boundaries', function () {
     $instance = new PackageTracking();
     $fedex = new FedEx();
 
-    $text = "First line has a tracking number000000000000and some other text\nSecond line has 98000000000 0000 0000";
-    $expected = new Collection(Package::class, [new Package($fedex, '000000000000'), new Package($fedex, '98000000000 0000 0000')]);
+    $text = "First line has a tracking number100000010000and some other text\nSecond line has 98000000000 0000 0000";
+    $expected = new Collection(Package::class, [new Package($fedex, '100000010000'), new Package($fedex, '98000000000 0000 0000')]);
 
     $results = $instance->parsePackages($text, false);
     expect($results)->toHaveCount($expected->count());
