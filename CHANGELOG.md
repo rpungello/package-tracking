@@ -2,6 +2,10 @@
 
 All notable changes to `package-tracking` will be documented in this file.
 
+## 0.4.0 - 2024-04-24
+
+Refine extraction of tracking numbers without boundaries
+
 ## 0.3.0 - 2024-04-24
 
 Added support for extracting tracking numbers without word boundaries
