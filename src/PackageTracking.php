@@ -80,18 +80,16 @@ class PackageTracking
             }
         }
 
-        return $packages->filter(fn (Package $package) => !$this->trackingNumberIsSubset($package, $packages));
+        return $packages->filter(fn (Package $package) => ! $this->trackingNumberIsSubset($package, $packages));
     }
 
     /**
-     * @param Package $package
-     * @param Collection<Package> $packages
-     * @return bool
+     * @param  Collection<Package>  $packages
      */
     private function trackingNumberIsSubset(Package $package, Collection $packages): bool
     {
         $currentTrackingNumber = str_replace(' ', '', $package->trackingNumber);
-        foreach($packages as $package) {
+        foreach ($packages as $package) {
             $trackingNumber = str_replace(' ', '', $package->trackingNumber);
             if ($currentTrackingNumber !== $trackingNumber && str_contains($trackingNumber, $currentTrackingNumber)) {
                 return true;

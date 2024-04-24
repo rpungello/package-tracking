@@ -4,19 +4,18 @@ namespace Rpungello\PackageTracking\Carriers;
 
 class DHL extends Carrier
 {
-
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getTrackingNumberPatterns(): array
     {
         return [
-            '[0-9]{10,11}'
+            '[0-9]{10,11}',
         ];
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getTrackingUrl(string $trackingNumber): string
     {
@@ -24,7 +23,7 @@ class DHL extends Carrier
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     public function getName(): string
     {
