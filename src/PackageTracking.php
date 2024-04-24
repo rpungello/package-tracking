@@ -3,6 +3,7 @@
 namespace Rpungello\PackageTracking;
 
 use Ramsey\Collection\Collection;
+use Ramsey\Collection\CollectionInterface;
 use Rpungello\PackageTracking\Carriers\Carrier;
 use Rpungello\PackageTracking\Carriers\DHL;
 use Rpungello\PackageTracking\Carriers\FedEx;
@@ -63,7 +64,7 @@ class PackageTracking
     /**
      * Parse multiple packages from a block of text and return a collection of Package objects.
      */
-    public function parsePackages(string $text, bool $requireBoundary = true): Collection
+    public function parsePackages(string $text, bool $requireBoundary = true): CollectionInterface
     {
         $packages = new Collection(Package::class);
 
@@ -79,6 +80,24 @@ class PackageTracking
             }
         }
 
-        return $packages;
+        return $packages->filter(fn (Package $package) => !$this->trackingNumberIsSubset($package, $packages));
+    }
+
+    /**
+     * @param Package $package
+     * @param Collection<Package> $packages
+     * @return bool
+     */
+    private function trackingNumberIsSubset(Package $package, Collection $packages): bool
+    {
+        $currentTrackingNumber = str_replace(' ', '', $package->trackingNumber);
+        foreach($packages as $package) {
+            $trackingNumber = str_replace(' ', '', $package->trackingNumber);
+            if ($currentTrackingNumber !== $trackingNumber && str_contains($trackingNumber, $currentTrackingNumber)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
