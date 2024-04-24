@@ -8,7 +8,7 @@ class FedEx extends Carrier
     {
         return [
             '\d{15}',
-            '\d{12}',
+            '\d{4} ?\d{4} ?\d{4}',
             '((98\d\d\d\d\d?\d\d\d\d|98\d\d) ?\d\d\d\d ?\d\d\d\d( ?\d\d\d)?)',
         ];
     }
