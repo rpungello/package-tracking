@@ -4,6 +4,7 @@ namespace Rpungello\PackageTracking;
 
 use Ramsey\Collection\Collection;
 use Rpungello\PackageTracking\Carriers\Carrier;
+use Rpungello\PackageTracking\Carriers\DHL;
 use Rpungello\PackageTracking\Carriers\FedEx;
 use Rpungello\PackageTracking\Carriers\UPS;
 use Rpungello\PackageTracking\Carriers\USPS;
@@ -24,6 +25,7 @@ class PackageTracking
             new UPS(),
             new FedEx(),
             new USPS(),
+            new DHL(),
         ]);
     }
 
@@ -41,6 +43,8 @@ class PackageTracking
 
     /**
      * Parse a single tracking number and return a Package object if it matches any of the supported carriers.
+     *
+     * @throws InvalidTrackingNumberException
      */
     public function parseTrackingNumber(string $trackingNumber): Package
     {
